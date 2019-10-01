@@ -1,0 +1,13 @@
+#!/bin/bash 
+
+batt_full=$(cat /sys/class/power_supply/BAT0/charge_full)
+batt_now=$(cat /sys/class/power_supply/BAT0/charge_now)
+batt_level=$(( 100 * $batt_now / $batt_full ))
+
+if [ $(cat /sys/class/power_supply/AC/online) -eq "1" ]; then
+    battery_status="$batt_level 🔌"
+else
+    battery_status="$batt_level 🔋"
+fi
+
+echo $battery_status
