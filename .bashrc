@@ -57,8 +57,9 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 parse_git_branch() {
- git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+ git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'
 }
+
 if [ "$color_prompt" = yes ]; then
  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;36m\]\u\[\033[01;35m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\] $(parse_git_branch)\[\033[00m\]\$ '
 else
@@ -127,21 +128,26 @@ source /opt/ros/melodic/setup.bash
 # cd
 # display system properties
 screenfetch
+echo
+tmux new -s Akhil
+# load user bin files
+export PATH=$PATH:/home/amkurup/bin/
 # trim directory names to 2
-PROMTP_DIRTRIM=2
+PROMPT_DIRTRIM=2
 # erase duplicate history entries
 export HISTCONTROL=ignoreboth:erasedups
 
 # ros print output format
 export ROSCONSOLE_FORMAT='[${severity}] [${time} ${node} ${line}]: ${message}'
 
-echo
-tmux new -s Akhil
-export PATH=$PATH:/home/amkurup/bin/
-
 # if [ -f `which powerline-daemon` ]; then
 #   powerline-daemon -q
 #   POWERLINE_BASH_CONTINUATION=1
 #   POWERLINE_BASH_SELECT=1
 #   . /usr/share/powerline/bindings/bash/powerline.sh
+# fi
+
+# if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
+#     GIT_PROMPT_ONLY_IN_REPO=1
+#     source $HOME/.bash-git-prompt/gitprompt.sh
 # fi
