@@ -12,9 +12,9 @@ Placeholder for misc linux config files
   cd ~/.tmux/tmux-mem-cpu
   cmake .
   make
-  su -
+  sudo su
   make install
-  logout
+  exit
 ```
 - have powerline fonts installed: https://github.com/powerline/fonts#installation
 ```
