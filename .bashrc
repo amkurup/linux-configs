@@ -8,16 +8,25 @@ case $- in
       *) return;;
 esac
 
+# Append, clear, and read history after each command
+PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+HISTCONTROL='ignoreboth'
 
 # append to the history file, don't overwrite it
 shopt -s histappend
+# Re-edit a history substitution line if it failed
+shopt -s histreedit
+# Edit a recalled history line before executing
+shopt -s histverify
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+# HISTSIZE=1000
+# HISTFILESIZE=2000
+HISTFILE=~/.bash_history # Set the filename to save history to
+HISTSIZE=100000 # Set your history file to be reasonably huge
+HISTTIMEFORMAT="[%F %T %Z]"
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -134,8 +143,9 @@ tmux new -s Akhil
 export PATH=$PATH:/home/amkurup/bin/
 # trim directory names to 2
 PROMPT_DIRTRIM=2
-# erase duplicate history entries
-export HISTCONTROL=ignoreboth:erasedups
+
+export PATH=/usr/local/cuda-10.2/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 # ros print output format
 export ROSCONSOLE_FORMAT='[${severity}] [${time} ${node} ${line}]: ${message}'
