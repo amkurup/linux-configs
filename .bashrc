@@ -9,7 +9,7 @@ case $- in
 esac
 
 # Append, clear, and read history after each command
-PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+# PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL='ignoreboth'
